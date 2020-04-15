@@ -65,7 +65,6 @@ def get_year_day_counts(data_path, output_path):
     Count the number of (year,day) pairs for every tile and save to a .csv
     '''
     tiles = [p for p in os.listdir(data_path) if p[0] == 'h']
-    tiles = tiles[:4]
     dfs = []
     for tile in tiles:
         dfs += [get_tile_days(data_path, tile)]
@@ -175,13 +174,11 @@ def main(args):
         
     if args.mode in ['all', 'images']:
         t0 = time.time()
-        hrange = hrange[:3]
-        vrange = vrange[:3]
         make_composite_image(args.data_path, args.output_path, hrange, vrange, args.year, args.dayofyear, daytime_hour)
         print(f"Time to make composite image={time.time()-t0} seconds")
 
     if args.mode in ['all', 'statistics']:
-        stats = random_statistics(args.data_path, args.output_path, hrange, vrange)
+        stats = random_statistics(args.data_path, args.output_path, hrange, vrange, samples=args.samples)
         print(stats)
         
     
@@ -194,7 +191,8 @@ if __name__ == '__main__':
     parser.add_argument('--mode', type=str, default='all', help='Select a model from [all, counts, images, statistics]')
     parser.add_argument('--year', type=int, default=2018, help='[images] Select year')
     parser.add_argument('--dayofyear', type=int, default=180, help='[images] Select day of year (1-366)')
-    parser.add_argument('--samples', type=int, default=100, help='[statisics] Select number of files to sample')
+    parser.add_argument('--samples', type=int, default=50, help='[statisics] Select number of files to sample')
 
     args = parser.parse_args()
     
+    main(args)
