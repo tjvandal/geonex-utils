@@ -18,3 +18,7 @@ Dependencies:
 
 Example command: <br>
 `python geonexl1g_data_test.py --data_path /nex/datapool/geonex/public/GOES16/GEONEX-L1B/ --output_path  ./data_statistics/GOES16/ --sensor GOES16 --samples 50`
+
+Sample composite image of Band 10 <br>
+
+![alt text](examples/data_statistics/GOES16/composite_2018_180_16_C10.jpg)
